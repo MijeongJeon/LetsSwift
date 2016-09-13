@@ -9,6 +9,8 @@ Let's Swift
 
 #### :blue_book: Source
 - Book : The Swift Programming Language(Swift 3 Beta)
+- Course : Stanford CS193P iOS 9 with Swift 2.2
 
 #### :page_with_curl: Detail Contents
 - Day01. let, var, array, dictionary
+- Day02. cs193p_Calculator(Optional, if, casting) 
