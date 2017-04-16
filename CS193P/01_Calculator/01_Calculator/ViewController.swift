@@ -1,4 +1,4 @@
-//
+ //
 //  ViewController.swift
 //  cs193p.01_Calculatror
 //
@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     var userInsInTheMiddleOfTyping: Bool = false
     
     
-    @IBAction func touchDigit(sender: UIButton) {
+    @IBAction func touchDigit(_ sender: UIButton) {
         let digit = sender.currentTitle! // swift infer the type all the tpye
         if userInsInTheMiddleOfTyping {
             let textCurrntlyInDisplay = display.text!
@@ -31,16 +31,19 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func performOperation(sender: UIButton) {
+    @IBAction func performOperation(_ sender: UIButton) {
         userInsInTheMiddleOfTyping = false
         if let mathmaticalSymbol = sender.currentTitle {
             if mathmaticalSymbol == "π" {
-                display.text = String(M_PI)
+                 display.text = String(M_PI)
                 
             }
+            drawLine(from: <#T##Double#>, to: <#T##Double#>, using: <#T##UIColor#>)
         }
     }
     
-    
+    func drawLine(from startX: Double, to endX: Double, using color: UIColor) {
+        let distance = startX - endX
+    }
     
 }
