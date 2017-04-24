@@ -517,36 +517,40 @@
 <a name="전달인자레이블"></a>
 ## 전달인자 레이블
 
-> func move(from start: Point, to end: Point)  
-> x.move(from: x, to: y) 
-
+```swift
+ func move(from start: Point, to end: Point)  
+ x.move(from: x, to: y) 
+```
 * **인자 레이블이  특별한 의미를 가지지 않는다면 생략하라**. `min(number1, number2)`, `zip(sequence1, sequence2)`
 
 * **값을 보존하는 타입 변환 이니셜라이저에서 첫번째 인자 레이블은 생략하라**. `Int64(someUInt32)`  
 첫번째 인자는 항상 변환의 원본이어야 한다.  
 	
-	> extension String {  
-	> // Convert `x` into its textual representation in the given radix  
-	> init(_ x: BigInt, radix: Int = 10)   ← Note the initial underscore  
-	> }  
-	>   
-	> text = "The value is: "  
-	> text += String(veryLargeNumber)  
-	> text += " and in hexadecimal, it's"  
-	> text += String(veryLargeNumber, radix: 16)  
+	```swift
+	 extension String {  
+	 // Convert `x` into its textual representation in the given radix  
+	 init(_ x: BigInt, radix: Int = 10)   ← Note the initial underscore  
+	}  
+   
+	 text = "The value is: "  
+	 text += String(veryLargeNumber)  
+	 text += " and in hexadecimal, it's"  
+	 text += String(veryLargeNumber, radix: 16)  
+	```
 	
 	타입의 크기가 작아지는 변환은 크기가 작아지는 것을 설명하는 레이블을 작성하는것이 좋다.
 	
-	> extension UInt32 {  
-	> /// Creates an instance having the specified `value`.  
-	> init(_ value: Int16)            ← Widening, so no label  
-	> /// Creates an instance having the lowest 32 bits of `source`.  
-	> init(truncating source: UInt64)  
-	> /// Creates an instance having the nearest representable  
-	> /// approximation of `valueToApproximate`.  
-	> init(saturating valueToApproximate: UInt64)  
-	> }
-	
+	```swift
+	 extension UInt32 {  
+	 /// Creates an instance having the specified `value`.  
+	 init(_ value: Int16)            ← Widening, so no label  
+	 /// Creates an instance having the lowest 32 bits of `source`.  
+	 init(truncating source: UInt64)  
+	 /// Creates an instance having the nearest representable  
+	 /// approximation of `valueToApproximate`.  
+	 init(saturating valueToApproximate: UInt64)  
+	 }
+	```
 	> 값을 보존하는 타입 변환은 단사형(monomorphism)이다. 원본이 다르면 결과도 각각 상황에 따라 다 르기 때문이다. 예를 들어 `Int8`에서 `Int64`로 변환하는 것은 값을 보존한다. 왜냐하면 어떤 `Int8` 값이라도 `Int64` 값으로 변환되기 때문이다. 하지만 반대방향으로의 변환은 값을 보존할수 없다. `Int64`는 `Int8`로 표현할 수 있는 것보다 더 큰 값을 가지기 때문이다.
 	>
 	> * 참고: 원래 값을 찾는 기능은 값을 보존하는 변환인지와 상관없다.
@@ -554,12 +558,18 @@
 * **첫 째 인자가 전치사구의 부분일때, 인자 레이블을 쓰자**.인자 레이블은 보통 전치사로 시작해야한다. `x.removeBoxes(havingLength: 12)`
 
 	첫 두 인자가 동일한 추상화 개념을 지닐 때는 예외이다.
-	> a.move(toX: b, y: c).  
-	> a.fade(fromRed: b, green: c, blue: d)
+	
+	```swift
+	 a.move(toX: b, y: c).  
+	 a.fade(fromRed: b, green: c, blue: d)
+	```
 	
 	그런 경우, 전치사 다음에 인자를 시작하여 추상화를 명확하게 하라.
-	> a.moveTo(x: b, y: c)  
-	> a.fadeFrom(red: b, green: c, blue: d)
+	
+	```swift
+	 a.moveTo(x: b, y: c)  
+	 a.fadeFrom(red: b, green: c, blue: d)
+	```
 
 * **첫번째 인자가 문법적 구문의 일부분일때, 레이블을 생략하라**. 대신기본이름의 앞에 단어를 덧붙이자.
 
@@ -589,21 +599,23 @@
 
 	이해하기 쉽고, 문서 주석에서 참조할 수 있으며, 튜플 멤버를 쉽게 사용 할 수 있게 해준다.
 
-	> /// Ensure that we hold uniquely-referenced storage for at least  
-	> /// `requestedCapacity` elements.  
-	> ///  
-	> /// If more storage is needed, `allocate` is called with  
-	> /// `byteCount` equal to the number of maximally-aligned  
-	> /// bytes to allocate.  
-	> ///  
-	> /// - Returns:  
-	> ///   - reallocated: `true` iff a new block of memory  
-	> ///     was allocated.  
-	> ///   - capacityChanged: `true` iff `capacity` was updated.  
-	> mutating func ensureUniqueStorage(  
-	> 	minimumCapacity requestedCapacity: Int,   
-	> 	allocate: (byteCount: Int) -> UnsafePointer<Void>  
-	> ) -> (reallocated: Bool, capacityChanged: Bool)  
+	```swift
+	 /// Ensure that we hold uniquely-referenced storage for at least  
+	 /// `requestedCapacity` elements.  
+	 ///  
+	 /// If more storage is needed, `allocate` is called with  
+	 /// `byteCount` equal to the number of maximally-aligned  
+	 /// bytes to allocate.  
+	 ///  
+	 /// - Returns:  
+	 ///   - reallocated: `true` iff a new block of memory  
+	 ///     was allocated.  
+	 ///   - capacityChanged: `true` iff `capacity` was updated.  
+	 mutating func ensureUniqueStorage(  
+	 	minimumCapacity requestedCapacity: Int,   
+		allocate: (byteCount: Int) -> UnsafePointer<Void>  
+	 ) -> (reallocated: Bool, capacityChanged: Bool)  
+	```
 	
 	클로저 매개변수에 전달인자 레이블을 사용하는 경우 기술적으로는 인자 레이블이지만, 레이블을 선택해 매개변수 이름인 것처럼 사용해야한다. 함수 내부에서 클로저를 호출하는 경우에는 첫번째 인자를 포함하지 않는 함수와 동일하게 읽는다.
 	> allocate(byteCount: newCount * elementSize)
