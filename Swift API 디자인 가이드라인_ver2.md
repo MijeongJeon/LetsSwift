@@ -115,6 +115,7 @@
 	///                                              ⎬ Symbol commands
 	/// - SeeAlso: `CustomDebugStringConvertible`,   ⎟
 	///   `CustomStringConvertible`, `debugPrint`.   ⎭
+	
 	public func print(
 	_ items: Any..., separator: String = " ", terminator: String = "\n")
 	```
@@ -265,8 +266,10 @@
 	
 	
 	이 가이드라인은, 값을 보존하는 타입 변환을 하지 않는 한, 첫 째 인자가 레이블을 가져야 한다는 것을 의미한다.
-
-	> let rgbForeground = RGBColor(cmykForeground)
+	
+	```swift
+	let rgbForeground = RGBColor(cmykForeground)
+	```
 
 * **사이드 이펙트에 따라 함수와 메소드 이름을 짓자**.
 
@@ -341,7 +344,7 @@
 
 * **약어를 피하라**. 약어 특히 비표준 약어는 이해하기 어렵다. 왜냐하면 그것을 이해하기 위해서 정확하게 풀어쓴 형태로 바꿔야 하기 때문이다.
 
-> 약어의 의미는 인터넷에서 쉽게 찾아져야 한다
+	> 약어의 의미는 인터넷에서 쉽게 찾아져야 한다
 
 * **선례를 받아들이자**. 기존 문화가 가진 합리적인 부분을 해치면서까지 초보자에게 적합한 용어 사용을 하지 말자.
 	
@@ -372,29 +375,33 @@
 * **대소문자 규칙을 지키자**. 타입과 프로토콜은 `UpperCamelCase`를 사용하고, 그 외 나머지는 `lowerCamelCase`를 사용한다.
 
 	미국영어에서 모두 대문자로 쓰이는 약어나 이니셜은 일률적으로 대문자나 소문자로 나타낸다.	
-	> var utf8Bytes: [UTF8.CodeUnit]  
-	> var isRepresentableAsASCII = true  
-	> var userSMTPServer: SecureSMTPServer
+	```swift
+	var utf8Bytes: [UTF8.CodeUnit]  
+	var isRepresentableAsASCII = true  
+	var userSMTPServer: SecureSMTPServer
+	```
 	
 	그 외 다른 약어는 보통단어처럼 취급한다.
 	
-	> var radarDetector: RadarScanner  
-	> var enjoysScubaDiving = true
-
+	```swift
+	var radarDetector: RadarScanner  
+	var enjoysScubaDiving = true
+	```
+	
 * 기본 의미를 공유하거나, 구분된 영역에서 사용되는 메소드들은 **이름을 공유 할 수 있다**.
 
 	예를들어, 여기서 이 메소드는 본질적으로 같은 일을 하기 때문에 동일한 이름을 사용한다.  
 	
 	```swift
 	extension Shape {
-	/// Returns `true` iff `other` is within the area of `self`.
-	func contains(_ other: Point) -> Bool { ... }
+		/// Returns `true` iff `other` is within the area of `self`.
+		func contains(_ other: Point) -> Bool { ... }
 	
-	/// Returns `true` iff `other` is entirely within the area of `self`.
-	func contains(_ other: Shape) -> Bool { ... }
+		/// Returns `true` iff `other` is entirely within the area of `self`.
+		func contains(_ other: Shape) -> Bool { ... }
 	
-	/// Returns `true` iff `other` is within the area of `self`.
-	func contains(_ other: LineSegment) -> Bool { ... }
+		/// Returns `true` iff `other` is within the area of `self`.
+		func contains(_ other: LineSegment) -> Bool { ... }
 	}
 	```
 	
@@ -402,9 +409,9 @@
 	
 	```swift
 	extension Collection where Element : Equatable {
-	/// Returns `true` iff `self` contains an element equal to
-	/// `sought`.
-	func contains(_ sought: Element) -> Bool { ... }
+		/// Returns `true` iff `self` contains an element equal to
+		/// `sought`.
+		func contains(_ sought: Element) -> Bool { ... }
 	}
 	```
 
@@ -412,11 +419,11 @@
 	
 	```swift
 	extension Database {
-	/// Rebuilds the database's search index
-	func index() { ... }
+		/// Rebuilds the database's search index
+		func index() { ... }
 	
-	/// Returns the `n`th row in the given table.
-	func index(_ n: Int, inTable: TableID) -> TableRow { ... }
+		/// Returns the `n`th row in the given table.
+		func index(_ n: Int, inTable: TableID) -> TableRow { ... }
 	}
 	```
 	
@@ -424,21 +431,22 @@
 	
 	```swift
 	extension Box {
-	/// Returns the `Int` stored in `self`, if any, and
-	/// `nil` otherwise.
-	func value() -> Int? { ... }
+		/// Returns the `Int` stored in `self`, if any, and
+		/// `nil` otherwise.
+		func value() -> Int? { ... }
 	
-	/// Returns the `String` stored in `self`, if any, and
-	/// `nil` otherwise.
-	func value() -> String? { ... }
+		/// Returns the `String` stored in `self`, if any, and
+		/// `nil` otherwise.
+		func value() -> String? { ... }
 	}
 	```
 
 
 ## 매개변수
-
-> func move(from start: Point, to end: Point)
-
+```swift
+ 	func move(from start: Point, to end: Point)
+```
+	
 
 * **문서 역할을 할 수 있는 매개변수 이름을 선택하라.** 비록 매개변수 이름이 함수나 메소드 호출시에 보이지 않더라도, 설명적인 측면에서 중요한 역할을 할 수있다.
 
@@ -484,11 +492,11 @@
 	
 	```swift
 	extension String {
-	/// ...description...
-	public func compare(
-	_ other: String, options: CompareOptions = [],
-	range: Range? = nil, locale: Locale? = nil
-	) -> Ordering
+		/// ...description...
+		public func compare(
+		_ other: String, options: CompareOptions = [],
+		range: Range? = nil, locale: Locale? = nil
+		) -> Ordering
 	}
 	```
 	
@@ -496,17 +504,17 @@
 
 	```swift
 	extension String {
-	/// ...description 1...
-	public func compare(_ other: String) -> Ordering
-	/// ...description 2...
-	public func compare(_ other: String, options: CompareOptions) -> Ordering
-	/// ...description 3...
-	public func compare(
-	_ other: String, options: CompareOptions, range: Range) -> Ordering
-	/// ...description 4...
-	public func compare(
-	_ other: String, options: StringCompareOptions,
-	range: Range, locale: Locale) -> Ordering
+		/// ...description 1...
+		public func compare(_ other: String) -> Ordering
+		/// ...description 2...
+		public func compare(_ other: String, options: CompareOptions) -> Ordering
+		/// ...description 3...
+		public func compare(
+		_ other: String, options: CompareOptions, range: Range) -> Ordering
+		/// ...description 4...
+		public func compare(
+		_ other: String, options: StringCompareOptions,
+		range: Range, locale: Locale) -> Ordering
 	}
 	```
 	
@@ -542,13 +550,13 @@
 	
 	```swift
 	 extension UInt32 {  
-	 /// Creates an instance having the specified `value`.  
-	 init(_ value: Int16)            ← Widening, so no label  
-	 /// Creates an instance having the lowest 32 bits of `source`.  
-	 init(truncating source: UInt64)  
-	 /// Creates an instance having the nearest representable  
-	 /// approximation of `valueToApproximate`.  
-	 init(saturating valueToApproximate: UInt64)  
+		 /// Creates an instance having the specified `value`.  
+		 init(_ value: Int16)            ← Widening, so no label  
+		 /// Creates an instance having the lowest 32 bits of `source`.  
+		 init(truncating source: UInt64)  
+		 /// Creates an instance having the nearest representable  
+		 /// approximation of `valueToApproximate`.  
+		 init(saturating valueToApproximate: UInt64)  
 	 }
 	```
 	> 값을 보존하는 타입 변환은 단사형(monomorphism)이다. 원본이 다르면 결과도 각각 상황에 따라 다 르기 때문이다. 예를 들어 `Int8`에서 `Int64`로 변환하는 것은 값을 보존한다. 왜냐하면 어떤 `Int8` 값이라도 `Int64` 값으로 변환되기 때문이다. 하지만 반대방향으로의 변환은 값을 보존할수 없다. `Int64`는 `Int8`로 표현할 수 있는 것보다 더 큰 값을 가지기 때문이다.
@@ -611,6 +619,7 @@
 	 ///   - reallocated: `true` iff a new block of memory  
 	 ///     was allocated.  
 	 ///   - capacityChanged: `true` iff `capacity` was updated.  
+	 
 	 mutating func ensureUniqueStorage(  
 	 	minimumCapacity requestedCapacity: Int,   
 		allocate: (byteCount: Int) -> UnsafePointer<Void>  
@@ -627,13 +636,13 @@
 	
 	```swift
 	struct Array {
-	/// Inserts `newElement` at `self.endIndex`.
-	public mutating func append(_ newElement: Element)
-	
-	/// Inserts the contents of `newElements`, in order, at
-	/// `self.endIndex`.
-	public mutating func append(_ newElements: S)
-	where S.Generator.Element == Element
+		/// Inserts `newElement` at `self.endIndex`.
+		public mutating func append(_ newElement: Element)
+		
+		/// Inserts the contents of `newElements`, in order, at
+		/// `self.endIndex`.
+		public mutating func append(_ newElements: S)
+		where S.Generator.Element == Element
 	}
 	```
 	
@@ -648,13 +657,13 @@
 	
 	```swift
 	struct Array {
-	/// Inserts `newElement` at `self.endIndex`.
-	public mutating func append(_ newElement: Element)
-	
-	/// Inserts the contents of `newElements`, in order, at
-	/// `self.endIndex`.
-	public mutating func append(contentsOf newElements: S)
-	where S.Generator.Element == Element
+		/// Inserts `newElement` at `self.endIndex`.
+		public mutating func append(_ newElement: Element)
+		
+		/// Inserts the contents of `newElements`, in order, at
+		/// `self.endIndex`.
+		public mutating func append(contentsOf newElements: S)
+		where S.Generator.Element == Element
 	}
 	```
 	
