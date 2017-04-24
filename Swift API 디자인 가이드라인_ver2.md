@@ -21,14 +21,14 @@
 # 목차
 * [기초](#기초)
 * [이름짓기](#이름짓기)
-* [명확하게 이름짓기](#명확하게 이름짓기)
-* [자연스러운 이름짓기](#자연스러운 이름짓기)
-* [용어 잘 사용하기](#용어 잘 사용하기)
+* [명확하게 이름짓기](#명확하게이름짓기)
+* [자연스러운 이름짓기](#자연스러운이름짓기)
+* [용어 잘 사용하기](#용어잘사용하기)
 * [약속들](#약속들)
-* [일반적인 약속](#일반적인 약속)
+* [일반적인 약속](#일반적인약속)
 * [매개변수](#매개변수)
-* [전달인자 레이블](#전달인자 레이블)
-* [특별한 경우](#특별한 경우)
+* [전달인자 레이블](#전달인자레이블)
+* [특별한 경우](#특별한경우)
 
 
 # 기초
@@ -38,7 +38,7 @@
 
 * **모든 선언에 주석을 달아라.** 주석은 디자인에 많은 도움을 주므로 잊지말자.
 
-> 만약 API 기능을 간단한 용어로 표현하기 힘들다면, API를 디자인 잘 못했을 가능성이 크다.
+	> 만약 API 기능을 간단한 용어로 표현하기 힘들다면, API를 디자인 잘 못했을 가능성이 크다.
 
 
 **<세부내용>**
@@ -68,7 +68,7 @@
 	/// returns `nil` otherwise.
 	mutating func popFirst() -> Element?
 	```
-주의: 위의 popFirst  같이, 요약이 여러 문장들로 구성될 때는 세미콜론으로 나누자.
+	* 주의: 위의 popFirst  같이, 요약이 여러 문장들로 구성될 때는 세미콜론으로 나누자.
 
 * **첨자(Subscript)가 무엇에 접근하는지 설명하라.**
 
@@ -140,7 +140,7 @@
 
 	```swift
 	extension List {
-	public mutating func remove(at position: Index) -> Element
+		public mutating func remove(at position: Index) -> Element
 	}
 	employees.remove(at: x)
 	```
@@ -175,11 +175,12 @@
 	
 	```swift
 	var string = "Hello"
+	
 	protocol ViewController {
-	associatedtype ViewType : View
+		associatedtype ViewType : View
 	}
 	class ProductionLine {
-	func restock(from widgetFactory: WidgetFactory)
+		func restock(from widgetFactory: WidgetFactory)
 	}
 	```
 
@@ -187,11 +188,12 @@
 
 	```swift
 	var greeting = "Hello"
+	
 	protocol ViewController {
-	associatedtype ContentView : View  	
+		associatedtype ContentView : View  	
 	}
 	class ProductionLine {
-	func restock(from supplier: WidgetFactory)
+		func restock(from supplier: WidgetFactory)
 	}
 	```
 	
@@ -199,7 +201,7 @@
 	
 	```swift
 	protocol Sequence {
-	associatedtype IteratorType : Iterator
+		associatedtype IteratorType : Iterator
 	}
 	```
 
@@ -224,12 +226,12 @@
 * **영어 문장을 만드는 방식으로 메소드와 함수이름을 만들자**.  
 
 	```swift	
-	// not good
+	// Not Preferred:
 	x.insert(y, at: z)          “x, insert y at z”
 	x.subViews(havingColor: y)  “x's subviews having color y”
 	x.capitalizingNouns()       “x, capitalizing nouns”
 	
-	// good
+	// Preferred:
 	x.insert(y, position: z)
 	x.subViews(color: y)
 	x.nounCapitalize()		
@@ -354,18 +356,18 @@
 
 ## 일반적인 약속
 
-● **O(1)이 아닌 계산 프로퍼티의 복잡도를 문서화하라**. 사람들은 프로퍼티에 접근할때는 상당한 계산이 요구되지 않는다고 생각하는데, 이는 프로퍼티를 단순하게 생각하기 때문이다. 이런 가정이 잘못된 것일 수 있음을 인지하게 하라.
+* **O(1)이 아닌 계산 프로퍼티의 복잡도를 문서화하라**. 사람들은 프로퍼티에 접근할때는 상당한 계산이 요구되지 않는다고 생각하는데, 이는 프로퍼티를 단순하게 생각하기 때문이다. 이런 가정이 잘못된 것일 수 있음을 인지하게 하라.
 
-● **그냥 함수보다는 메소드와 프로퍼티를 쓰자**. 그냥 함수는 오직 특별한 경우에만 쓰자.
+* **그냥 함수보다는 메소드와 프로퍼티를 쓰자**. 그냥 함수는 오직 특별한 경우에만 쓰자.
 
-1. 명확한 `self`가 없을 때
-> min(x, y, z)
-
-2. 범용적 제네릭 함수일 때
-> print(x)
-
-3. 함수가 원래 있던 것일 때
-> sin(x)
+	1. 명확한 `self`가 없을 때
+		> min(x, y, z)
+	
+	2. 범용적 제네릭 함수일 때
+		> print(x)
+	
+	3. 함수가 원래 있던 것일 때
+		> sin(x)
 
 * **대소문자 규칙을 지키자**. 타입과 프로토콜은 `UpperCamelCase`를 사용하고, 그 외 나머지는 `lowerCamelCase`를 사용한다.
 
@@ -513,7 +515,7 @@
 * **매개변수 목록의 끝 부분에 초기값이 있는 매개변수를 쓰자.** 초기값이 없는 매개변수들이 보통 메소드의 핵심 기능을 담당하며, 메소드가 호출될때 안정적인 초기 사용 패턴을 제공한다.
 
 
-##전달인자 레이블
+## 전달인자 레이블
 
 > func move(from start: Point, to end: Point)  
 > x.move(from: x, to: y) 
